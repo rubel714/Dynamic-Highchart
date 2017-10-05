@@ -1,708 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Rubel - Personal Resume and Portfolio</title>
-	<!--Fevicon Icon-->
-	<link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="images/favicon/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<!--Fevicon Icon-->
+<title>HighChart Type Change Dynamically</title>
+<meta charset="UTF-8">
+<meta name="description" content="HighChart">
+<meta name="keywords" content="HighChart,HighChart Type Change,Dynamic HighChart">
+<meta name="author" content="Rubel">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style>
+	body{
+		background:#E8E8E8;
+	}
+	a{
+		border: 1px solid green;
+		border-radius: 5px;
+		padding: 10px;
+		text-decoration:none;
+		float:left;
+		margin:4px;
+		text-align:center;
+		display: block;
+		color: green;
+	}
+	
+</style>
+<script>
+$(function () {
+	//default chart type
+	var chartype = 'line';
 
-  <!--Font Family(GoogleFont-Roboto)-->
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,400italic,300italic,300,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	//On page load call the function drawDynamicChart to draw chart
+	drawDynamicChart(chartype);
 
-  <!-- Animation -->
-  <link href="css/animate.css" rel="stylesheet" type="text/css">
-  <!--Vegas-->
-  <link href="css/vegas.min.css" rel="stylesheet" type="text/css">
-  <!-- IconFont(ionicon) -->
-  <link href='css/ionicons.min.css' rel='stylesheet' type='text/css'>
-  <!--Magnific PopUp-->
-  <link href='css/magnific-popup.css' rel='stylesheet' type='text/css'>
-  <!--Bootstrap-->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!--Owl Carousel-->
-  <link href="css/owl.carousel.css" rel="stylesheet">
-  <!--Style-->
-  <link href="css/style.css" rel="stylesheet">
+	//On click change the chart type dinamically
+	$('.option').click(function(){
+		var chartype = $(this).attr('id');
+		drawDynamicChart(chartype);
+	});
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="js/html5shiv.min.js"></script>
-  <script src="js/respond.min.js"></script>
-  <![endif]-->
+	function drawDynamicChart(chartype){
+		$('#chartcontainer').highcharts({
+			chart: {
+				type: chartype
+			},
+			title: {
+				text: 'Dynamically changable highchart'
+			},
+			xAxis: {
+				categories: ['Hard disk', 'Keyboard', 'Monitor', 'Mother Board', 'Processor', 'Mouse', 'Speaker', 'RAM']
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Total Available Quantity'
+				}
+			},
+			plotOptions: {
+				//this is only use for pie chart
+				pie: {
+					allowPointSelect: true,
+					cursor: 'pointer'
+				}
+			},
+			exporting: {
+				filename: 'MyChartName'
+			},
+			credits: {
+				enabled: false
+			},
+			series: [{
+				name:'Product',
+				data: [
+					['Hard disk',   15],
+					['Keyboard',       8],
+					['Monitor',	20],
+					['Mother Board',    5],
+					['Processor',    7],
+					['Mouse',   30],
+					['Speaker',   9],
+					['RAM',   6]
+				]
+			}]
+		});
+	}
+    });
+</script>
 </head>
 <body>
-<a class="toggle-nav-btn" href="#"><i class="bar ion-navicon"></i><i class="xf-close ion-ios-close-empty"></i></a>
-<!--
-* Navigation
--->
-<nav id="navbar" class="navigation scrollspy">
-  <div class="navbar-brand"><a class="logo" href="index.html"><img src="images/logo.png" alt=""></a></div>
-  <ul class="nav fp-nav">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#service">Services</a></li>
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<div class="wrapper">
-  <!--
-  ##Home
-  ##=========================================================##-->
-  <header id="home" class="header">
-    <div class="container">
-      <div class="header-content ifolio fadeIn"  data-wow-delay=".15s">
-        <!--Header Text-->
-        <div class="header-text backStyle">
-          <h4 class="sub-title">Hello</h4>
-          <h2 class="title">I am Rubel</h2>
-          <p class="text">(Senior Software Developer at SoftWorks Ltd.)</p>
-        </div> <!--//End Header Text-->
-
-        <!--Social List-->
-        <div class="social-list">
-          <p>Follow me:</p>
-		  <a href="https://www.linkedin.com/profile/preview?locale=en_US&trk=prof-0-sb-preview-primary-button" target="_blank"><i class="ion-social-linkedin-outline"></i></a>
-          <a href="https://www.facebook.com/rubel.meanew"  target="_blank"><i class="ion-social-facebook-outline"></i></a>          
-          <a href="https://plus.google.com/u/0/117065544078086559120/posts" target="_blank"><i class="ion-social-googleplus-outline"></i></a>
-          <a href="https://twitter.com/MeanRubel" target="_blank"><i class="ion-social-twitter-outline"></i></a>
-	   </div> <!--//End Social List-->
-      </div>
-    </div>
-  </header> <!--//##End Home-->
-
-  <nav class="navbar scrollspy">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header logoStyle">
-        <!--<a class="navbar-brand" href="index.html"><img src="images/logo_white.png" alt=""></a>-->
-		<a href="index.html">Rubel</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#service">Services</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <!--
-  ##About
-  ##=========================================================##-->
-  <section id="about" class="section about">
-    <div class="container">
-      <!--Section Header-->
-      <header class="section-header ifolio fadeInDown"  data-wow-delay=".15s">
-        <h2 class="title"><span>Who</span> I am</h2>
-        <p>I am a software engineer with over five years experience working on a 
-		variety of systems, including some safety-critical and safety-related. 
-		In this time I have become skilled with a number of languages including 
-		PHP, ASP.NET, C# and C. Amongst my strengths are my ability to communicate 
-		and my desire to learn. I'm a sociable, energetic person with diverse 
-		skills and interests.</p>
-      </header> <!--//End Section Header-->
-
-      <div class="row">
-        <div class="col-md-4">
-          <figure class="image-container ifolio fadeInLeft"  data-wow-delay=".2s">
-            <img src="images/rubel.jpeg" alt="">
-          </figure>
-        </div>
-
-        <div class="col-md-4">
-          <div class="about-text ifolio bounceIn"  data-wow-delay=".25s">
-            <h4>Senior Software Developer From Bangladesh</h4>
-            <p>I am a software engineer with over five years experience working on a 
-		variety of systems, including some safety-critical and safety-related. 
-		In this time I have become skilled with a number of languages including 
-		PHP, ASP.NET, C# and C. Amongst my strengths are my ability to communicate 
-		and my desire to learn. I'm a sociable, energetic person with diverse 
-		skills and interests.</p>
-            <a class="btn btn-primary" target="_blank" href="personalfiles/Mohammad_Rubel_mean_cv.pdf"><span class="ion-android-download"></span> Download CV</a>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class=" ifolio fadeInRight"  data-wow-delay=".3s">
-            <h4 class="sub-title">Personal Information</h4>
-            <ul class="personal-info">
-              <li><strong>Name:</strong> Mohammad Rubel Mean, B.Sc in CSE</li>
-              <li><strong>Date of Birth:</strong> March 15, 1991</li>
-              <li><strong>Phone:</strong> +88-01921232956</li>
-              <li><strong>Skype:</strong> rubelmea714</li>
-              <li><strong>Email:</strong> <a href="mailto:rubel714@gmail.com">rubel714@gmail.com</a></li>
-              <li><strong>Website:</strong> <a target="_blank" href="http://w3basecode.com/rubel">http://w3basecode.com/rubel</a></li>
-              <li><strong>Address:</strong> 2/H/10 Golden Street, Shyamoli, Dhaka-1207, Bangladesh</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End About-->
-
-  <!--
-  ##Service
-  ##=========================================================##-->
-  <section id="service" class="section services overlay-default">
-    <div class="container">
-      <!--Section Header-->
-      <header class="section-header dark ifolio fadeInRight" data-wow-delay=".15s">
-        <h2 class="title"><span>What</span> I Do</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-      </header> <!--//End Section Header-->
-
-      <div class="row">
-        <div class="col-md-3">
-          <!--Text Box-->
-          <div class="text-box ifolio fadeInDown" data-wow-delay=".2s">
-            <header class="text-box-header">
-              <span class="icon ion-leaf"></span>
-              <h4 class="title">Web Design</h4>
-            </header>
-            <div class="text">
-              <p>Cras id dignissim urna. Quisque lectus massa, vestibulum sed ultricies vitae.</p>
-            </div>
-          </div>
-        </div> <!--//End Text Box-->
-
-        <div class="col-md-3">
-          <!--Text Box-->
-          <div class="text-box ifolio fadeInDown" data-wow-delay=".25s">
-            <header class="text-box-header">
-              <span class="icon ion-code"></span>
-              <h4 class="title">Web Development</h4>
-            </header>
-            <div class="text">
-              <p>Cras id dignissim urna. Quisque lectus massa, vestibulum sed ultricies vitae.</p>
-            </div>
-          </div> <!--//End Text Box-->
-        </div>
-
-        <div class="col-md-3">
-          <!--Text Box-->
-          <div class="text-box ifolio fadeInDown" data-wow-delay=".3s">
-            <header class="text-box-header">
-              <span class="icon ion-arrow-graph-up-right"></span>
-              <h4 class="title">Analytics</h4>
-            </header>
-            <div class="text">
-              <p>Cras id dignissim urna. Quisque lectus massa, vestibulum sed ultricies vitae.</p>
-            </div>
-          </div> <!--//End Text Box-->
-        </div>
-
-        <div class="col-md-3">
-          <!--Text Box-->
-          <div class="text-box ifolio fadeInDown" data-wow-delay=".35s">
-            <header class="text-box-header">
-              <span class="icon ion-help-buoy"></span>
-              <h4 class="title">Support</h4>
-            </header>
-            <div class="text">
-              <p>Cras id dignissim urna. Quisque lectus massa, vestibulum sed ultricies vitae.</p>
-            </div>
-          </div> <!--//End Text Box-->
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Service-->
-
-  <!--
-  ##Resume
-  ##=========================================================##-->
-  <section id="resume" class="section">
-    <div class="container">
-      <!--Section Header-->
-      <header class="section-header left ifolio fadeInLeft" data-wow-delay=".15s">
-        <h2 class="title">My <span>Resume</span></h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-      </header> <!--//End Section Header-->
-
-      <div class="row">
-        <div class="col-md-6">
-          <h4 class="sub-title ifolio fadeIn" data-wow-delay=".15s"><i class="icon ion-ios-briefcase"></i> Experience</h4>
-
-          <div class="resume-box ifolio fadeInLeft" data-wow-delay=".2s">
-            <div class="box-item">
-              <header class="box-header">
-                <div class="position">
-                  <h6>Leadership</h6>
-                  <span>Softworks Ltd</span>
-                </div>
-                <span class="duration">2011 &dash; Till Now</span>
-              </header>
-              <p class="text"> Have good leading capacity.</p>
-            </div>
-
-            <div class="box-item ifolio fadeInLeft" data-wow-delay=".25s">
-              <header class="box-header">
-                <div class="position">
-                  <h6>Software Development</h6>
-                  <span>Softworks Ltd</span>
-                </div>
-                <span class="duration">2011 &dash; Till Now</span>
-              </header>
-              <p class="text">I have 4+ years working experience on Front-End and Back-End developer.
-			  I am able to fetch any challenging task.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <h4 class="sub-title ifolio fadeIn" data-wow-delay=".15s"><i class="icon ion-ios-book"></i> Education</h4>
-          <div class="resume-box">
-            <div class="box-item ifolio fadeInRight" data-wow-delay=".2s">
-              <header class="box-header">
-                <div class="position">
-                  <h6>B.Sc in CSE</h6>
-                  <span>Dhaka International University (DIU)</span>
-                </div>
-                <span class="duration">4 Years</span>
-              </header>
-              <p class="text">I have complete 4 years Bachelor of Science in Computer Science and Engineering
-			  from Dhaka International University (DIU). I achieved CGPA 3.89 out of 4.00. I have completed some
-			   special projects within this 4 years. My best projects are...
-			   <br/>
-			   <br/>
-			   <span class="spanStyle">Language Translator:</span> 
-			   Language Translator for transfer word or sentence one language 
-			   to another language same as google translator. 
-			   I included here Bengali and English. There are an admin panel for 
-			   include new words.
-			   <br/>Development Tools: SQL Server 2008 and C#.NET
-			   
-			   <br/>
-			   <br/>
-			   <span class="spanStyle">Skills Development and Public Service Tracker:</span> I have complete 4 years Bachelor of Science in Computer Science and Engineering.
-			   <br/>Development Tools: PHP, MySQL, JavaScript,  
-			   jQuery, JSON, HighMap, Highchart, HTML, CSS and Bootstrap.
-			   
-			   </p>
-            </div>
-
-            <div class="box-item ifolio fadeInRight" data-wow-delay=".25s">
-              <header class="box-header">
-                <div class="position">
-                  <h6>Diploma in Computer Department</h6>
-                  <span>Sherpur Polytechnic Institute</span>
-                </div>
-                <span class="duration">4 Years</span>
-              </header>
-              <p class="text">I have complete 4 years Diploma in Computer department from Sherpur Polytechnic Institute.
-			  I achieved GPA 3.80 out of 4.00. I have completed one project(School Management) within this.
-			  <br/>
-			  <strong><i class="ion-android-exit"></i> Language Translator:</strong> I have complete 4 years Bachelor of Science in Computer Science and Engineering.
-			  <br/><strong><i class="ion-code-working"></i> Development Tools:</strong> HTML, CSS, PHP and MySQL.
-			   
-			  </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Resume-->
-
-  <!--
-  ##Portfolio
-  ##=========================================================##-->
-  <section id="portfolio" class="section section-bg ifolio fadeIn" data-wow-delay=".15s">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="title">My  <span>Portfolio</span></h2>
-        <p>I have complete many small and large project successfully on my long term working experience.</p>
-      </div>
-    </div>
-
-    <div class="portfolio">
-      <div class="container">
-        <ul class="filtering-nav">
-          <li class="filter" data-filter="all">Show All</li>
-          <li class="filter" data-filter=".web-design">Web Design</li>
-          <li class="filter" data-filter=".web-development">Web Development</li>
-          <li class="filter" data-filter=".photography">Photography</li>
-          <li class="filter" data-filter=".wordpress">WrodPress</li>
-        </ul>
-      </div>
-
-      <div class="portfolio-content">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-6 mix web-development web-design">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img01.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img01.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix photography">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img02.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img02.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix wordpress web-development">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img03.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img03.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix web-design">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img04.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img04.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix web-development web-design">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img05.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img05.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix photography">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img06.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img06.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix wordpress web-development">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img07.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img07.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 mix web-design">
-            <figure class="portfolio-item">
-              <img src="images/portfolio/img08.jpg" alt="">
-              <figcaption class="item-caption">
-                <div class="buttons-group">
-                  <a class="view-btn" href="images/portfolio/img08.jpg" title="Malesuada Parturient"><i class="ion-eye"></i></a>
-                  <a class="link-btn" href="#" title="Malesuada Parturient"><i class="ion-link"></i></a>
-                </div>
-
-                <div class="text">
-                  <h5 class="title">Malesuada Parturient</h5>
-                  <p>Aenean commodo ligula eget dolor.</p>
-                </div>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Portfolio-->
-
-  <!--
-  ##Testimonial
-  ##=========================================================##-->
-  <section id="testimonial" class="section testimonial-wrap overlay-default ifolio fadeIn" data-wow-delay=".15s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 div-center">
-          <div class="testimonial">
-            <div class="testimonial-inner">
-              <p>Ut neque eros, pulvinar eu blandit quis, lacinia nec ipsum. Etiam vel orci ipsum. Sed eget velit ipsum. Duis in tortor scelerisque felis mattis imperdiet. Donec at libero tellus. Suspendisse consectetur consectetur bibendum.</p>
-              <div class="client-info">
-                <h5 class="name">Ann Long</h5>
-                <span class="position">CEO at <a href="#">Google Inc.</a></span>
-              </div>
-            </div>
-            <div class="testimonial-inner">
-              <p>Ut neque eros, pulvinar eu blandit quis, lacinia nec ipsum. Etiam vel orci ipsum. Sed eget velit ipsum. Duis in tortor scelerisque felis mattis imperdiet. Donec at libero tellus. Suspendisse consectetur consectetur bibendum.</p>
-              <div class="client-info">
-                <h5 class="name">Tanirt Acemrar</h5>
-                <span class="position">Co-Founder at <a href="#">Apple</a></span>
-              </div>
-            </div>
-            <div class="testimonial-inner">
-              <p>Ut neque eros, pulvinar eu blandit quis, lacinia nec ipsum. Etiam vel orci ipsum. Sed eget velit ipsum. Duis in tortor scelerisque felis mattis imperdiet. Donec at libero tellus. Suspendisse consectetur consectetur bibendum.</p>
-              <div class="client-info">
-                <h5 class="name">Aanu Ajayi</h5>
-                <span class="position">CEO at <a href="#">Twitter</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Testimonial-->
-
-  <!--
-  ##Blog
-  ##=========================================================##-->
-  <section id="blog" class="section">
-    <div class="container">
-      <header class="section-header left  ifolio zoomIn" data-wow-delay=".15s">
-        <h2 class="title">Latest from <span>Blog</span></h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-      </header>
-
-      <div class="blog-section">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="blog-post ifolio fadeIn" data-wow-delay=".15s">
-              <figure class="thumbnail">
-                <img src="images/post_img01.jpg" alt="">
-              </figure>
-
-              <div class="desc">
-                <h3 class="title"><a href="#">Chicest Ways to Wear a Skirt</a></h3>
-                <p class="post-meta"><i class="ion-pricetag"></i> <a href="#">Design</a> <i class="ion-chatbox"></i> <a href="#">03 Comments</a> </p>
-                <div class="inner-content">
-                  <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa...</p>
-                  <a class="more-btn" href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="blog-post ifolio fadeIn" data-wow-delay=".2s">
-              <figure class="thumbnail">
-                <img src="images/post_img02.jpg" alt="">
-              </figure>
-
-              <div class="desc">
-                <h3 class="title"><a href="#">Pretty Ponytails for Summer</a></h3>
-                <p class="post-meta"><i class="ion-pricetag"></i> <a href="#">Design</a> <i class="ion-chatbox"></i> <a href="#">03 Comments</a> </p>
-                <div class="inner-content">
-                  <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa...</p>
-                  <a class="more-btn" href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="blog-post ifolio fadeIn" data-wow-delay=".25s">
-              <figure class="thumbnail">
-                <img src="images/post_img03.jpg" alt="">
-              </figure>
-
-              <div class="desc">
-                <h3 class="title"><a href="#">A Quick Guide to Mykonos</a></h3>
-                <p class="post-meta"><i class="ion-pricetag"></i> <a href="#">Design</a> <i class="ion-chatbox"></i> <a href="#">03 Comments</a> </p>
-                <div class="inner-content">
-                  <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa...</p>
-                  <a class="more-btn" href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="blog-post ifolio fadeIn" data-wow-delay=".3s">
-              <figure class="thumbnail">
-                <img src="images/post_img04.jpg" alt="">
-              </figure>
-
-              <div class="desc">
-                <h3 class="title"><a href="#">Friday night at goldie’s</a></h3>
-                <p class="post-meta"><i class="ion-pricetag"></i> <a href="#">Design</a> <i class="ion-chatbox"></i> <a href="#">03 Comments</a> </p>
-                <div class="inner-content">
-                  <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa...</p>
-                  <a class="more-btn" href="#">Continue Reading</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Blog-->
-
-  <!--
-  ##Fun Fact
-  ##=========================================================##-->
-  <section id="funfacts" class="section funfact-wrap overlay-primary ifolio fadeInLeft" data-wow-delay=".15s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="funfact-box">
-            <span class="countnum">150</span>
-            <span class="text">Happy Client</span>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="funfact-box">
-            <span class="countnum">75</span>
-            <span class="text">Complete Project</span>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="funfact-box">
-            <span class="countnum">63</span>
-            <span class="text">Award Won</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> <!--//##End Fun Fact-->
-
-  <!--
-  ##Contact
-  ##=========================================================##-->
-  <section id="contact" class="section">
-    <div class="container">
-      <header class="section-header ifolio bounceIn" data-wow-delay=".15s">
-        <h2 class="title">Get in <span>Touch</span></h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-      </header>
-      <div class="row">
-        <div class="col-md-7">
-          <div class="media-container ifolio fadeIn" data-wow-delay=".15s">
-            <iframe src="http://mapbuildr.com/frame/qb44jo" height="410" width="550"></iframe>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="ifolio fadeInRight" data-wow-delay=".25s">
-            <p class="alert-success success" style="display: none">Your massage has been sent!</p>
-            <p class="alert-danger error" style="display: none">Opps!! You dont fill all required field correctly.</p>
-            <form class="contact-form" role="form">
-              <input type="text" name="name" placeholder="Name*" required>
-              <input type="email" name="email" placeholder="Email Address*" required>
-              <input type="text" name="subject" placeholder="Subject" required>
-              <textarea rows="5" name="message" placeholder="Message*" required></textarea>
-              <button class="btn btn-primary" type="submit" name="submit"><i class="ion-navigate"></i> Send</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--
-  ##Footer
-  ##=========================================================##-->
-  <footer id="footer" class="footer">
-    <div class="container">
-      <p class="copyright">&copy; Personal Resume and Portfolio of Rubel</p>
-    </div>
-  </footer> <!--//##End Footer-->
+<div style="width: 50%; margin: 0 auto; height: 100px; text-align:center;">
+	<a href="javascript:void(0);" class="option" id="line">Line Chart</a>
+	<a href="javascript:void(0);" class="option" id="area">Area Chart</a>
+	<a href="javascript:void(0);" class="option" id="bar">Bar Chart</a>
+	<a href="javascript:void(0);" class="option" id="column">Column Chart</a>
+	<a href="javascript:void(0);" class="option" id="pie">Pie Chart</a>
 </div>
 
-<!--jQuery-->
-<script src="js/jquery.min.js"></script>
-<!--Waypoint-->
-<script src="js/waypoints.min.js"></script>
-<!--Vegas-->
-<script src="js/vegas.min.js"></script>
-<!--WOW Js-->
-<script src="js/wow.min.js"></script>
-<!--Bootstrap-->
-<script src="js/bootstrap.min.js"></script>
-<!--Mixitup-->
-<script src="js/jquery.mixitup.js"></script>
-<!--Magnific PopUp-->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<!-- Carousel -->
-<script src="js/owl.carousel.min.js"></script>
-<!-- CounterUp -->
-<script src="js/jquery.counterup.min.js"></script>
-<!-- Contact Form -->
-<script src="js/jquery.form.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<!-- Custom -->
-<script src="js/custom.js"></script>
+<div id="chartcontainer" style="width: 80%;min-width: 500px; height: 500px; margin: 0 auto"></div>
 </body>
-</html>
